@@ -1,0 +1,13 @@
+neurobloom-pwa/
+│
+├── index.html               # Ana Giriş Noktası ve SPA Görünüm Kapsayıcıları
+├── manifest.json            # PWA Manifest Tanımlamaları
+├── sw.js                    # Servis Çalışanı (Çevrimdışı Önbellekleme & Bildirimler)
+│
+├── css/
+│   └── style.css            # Tasarım Sistemi, Animasyonlar ve Mobil Öncelikli Düzen
+│
+└── js/
+    ├── app.js               # Uygulama Durum Yönetimi, Yönlendirme, Firebase/Mock & Çevrimdışı Depolama
+    ├── SpeechEngine.js      # Web Speech API (STT/TTS) ve Mikrofon Analiz Modülü
+    └── VisionEngine.js      # Kamera API, Yüz Kılavuzu ve Ayna Modülü
