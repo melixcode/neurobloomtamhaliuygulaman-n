@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>NeuroBloom - Çocuk Gelişim & Konuşma Terapisi Platformu</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+  <div id="splash-screen" class="view active">
+    <div class="splash-content">
+      <div class="logo-container">
+        <svg class="main-logo" viewBox="0 0 512 512" width="120" height="120">
+          <circle cx="256" cy="256" r="240" fill="#A5B4FC"/>
+          <circle cx="256" cy="256" r="180" fill="#60A5FA"/>
+          <path class="bloom-petal" d="M256 120 C220 120, 190 150, 190 190 C190 240, 256 340, 256 340 C256 340, 322 240, 322 190 C322 150, 292 120, 256 120 Z" fill="#F472B6"/>
+        </svg>
+      </div>
+      <h1 class="brand-title">NeuroBloom</h1>
+      <p class="brand-subtitle">Potansiyelini Çiçeklendir</p>
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <div id="welcome-view" class="view">
+    <div class="card container text-center">
+      <h2>Hoş Geldiniz!</h2>
+      <p>Lütfen devam etmek için profil türünüzü seçin:</p>
+      <div class="role-grid">
+        <button class="btn btn-primary role-card" data-role="child">
+          <span class="icon">🧒</span> <h3>Çocuk</h3>
+        </button>
+        <button class="btn btn-secondary role-card" data-role="parent">
+          <span class="icon">👪</span> <h3>Ebeveyn</h3>
+        </button>
+        <button class="btn btn-accent role-card" data-role="therapist">
+          <span class="icon">🩺</span> <h3>Terapist</h3>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="onboarding-view" class="view">
+    <div class="card container">
+      <h2>Sistem İzinleri</h2>
+      <p>NeuroBloom'un çalışabilmesi için şu donanımlara güvenli erişim sağlamalıyız:</p>
+      <div class="permission-item">
+        <div class="perm-info">
+          <strong>🎤 Mikrofon Erişimi</strong>
+          <p>Konuşma analizi ve telaffuz oyunları için gereklidir.</p>
+        </div>
+        <button id="btn-perm-mic" class="btn btn-secondary btn-sm">İzin Ver</button>
+      </div>
+      <div class="permission-item">
+        <div class="perm-info">
+          <strong>📷 Kamera Erişimi</strong>
+          <p>Ayna modunda ağız ve dudak kası egzersizleri için gereklidir.</p>
+        </div>
+        <button id="btn-perm-cam" class="btn btn-secondary btn-sm">İzin Ver</button>
+      </div>
+      <div class="permission-item">
+        <div class="perm-info">
+          <strong>🔔 Anlık Bildirimler</strong>
+          <p>Günlük hatırlatıcılar ve terapist mesajları için.</p>
+        </div>
+        <button id="btn-perm-notify" class="btn btn-secondary btn-sm">İzin Ver</button>
+      </div>
+      <hr>
+      <button id="btn-complete-onboarding" class="btn btn-primary w-full" disabled>Devam Et</button>
+    </div>
+  </div>
+
+  <div id="child-dashboard" class="view">
+    <header class="app-header">
+      <div class="user-stats">
+        <span class="badge badge-xp">⭐ <span id="txt-xp">120</span> XP</span>
+        <span class="badge badge-coin">🪙 <span id="txt-coins">45</span> NC</span>
+        <span class="badge badge-level">🚀 Seviye <span id="txt-level">1</span></span>
+      </div>
+      <div class="settings-trigger" onclick="app.openSettings()">⚙️</div>
+    </header>
+
+    <main class="app-content">
+      <section class="neurobot-section card">
+        <div class="neurobot-room" id="neurobot-room">
+          <div class="room-decoration" id="room-bg"></div>
+          <div class="neurobot-avatar" id="neurobot-avatar">
+            <svg viewBox="0 0 100 100" width="100" height="100">
+              <circle cx="50" cy="65" r="25" fill="#60A5FA"/>
+              <circle id="bot-evolution-node" cx="50" cy="35" r="15" fill="#A5B4FC"/>
+              <circle cx="45" cy="35" r="2" fill="#000"/>
+              <circle cx="55" cy="35" r="2" fill="#000"/>
+              <path d="M 45 42 Q 50 47 55 42" stroke="#000" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="speech-bubble" id="neurobot-bubble">Merhaba! Bugün harika bir gün. Konuşma egzersizlerine hazır mısın?</div>
+        </div>
+        <div class="room-controls">
+          <button class="btn btn-sm btn-accent" onclick="app.openStore()">🛒 Mağaza</button>
+          <button class="btn btn-sm btn-secondary" onclick="app.triggerInteraction()">👋 Etkileşim</button>
+        </div>
+      </section>
+
+      <h3>🎯 Çalışma Yolculuğum</h3>
+      <div class="therapy-track" id="therapy-track">
+        </div>
+    </main>
+  </div>
+
+  <div id="game-workspace" class="view">
+    <header class="app-header">
+      <button class="btn btn-sm btn-secondary" onclick="app.exitGame()">↩ Çıkış</button>
+      <h3 id="game-title">Oyun Yükleniyor...</h3>
+      <div id="game-score">🪙 0</div>
+    </header>
+    <div class="game-container container">
+      <div class="camera-wrapper hidden" id="game-camera-container">
+        <video id="game-video" autoplay playsinline muted class="mirror-mode"></video>
+        <div class="face-overlay-guide">
+          <div class="lip-target-box"></div>
+        </div>
+      </div>
+
+      <div class="card game-card text-center">
+        <div id="game-target-display" class="target-display">...</div>
+        <p id="game-instructions">Yönerge bekleniyor...</p>
+        
+        <div class="audio-wave hidden" id="audio-wave">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+
+        <div class="game-action-area" id="game-action-area">
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="store-view" class="view">
+    <div class="container card">
+      <div class="flex-between">
+        <h2>NeuroBot Mağazası</h2>
+        <span class="badge badge-coin">🪙 <span id="store-coin-count">0</span> NC</span>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="app.switchStoreTab('costume')">Giyim</button>
+        <button class="tab-btn" onclick="app.switchStoreTab('room')">Oda Objeleri</button>
+      </div>
+      <div class="store-grid" id="store-grid"></div>
+      <button class="btn btn-secondary w-full m-top-10" onclick="app.closeStore()">Kapat</button>
+    </div>
+  </div>
+
+  <div id="parent-dashboard" class="view">
+    <header class="app-header">
+      <h2>👪 Ebeveyn Kontrol Paneli</h2>
+      <button class="btn btn-sm btn-secondary" onclick="app.logout()">Çıkış</button>
+    </header>
+    <main class="container">
+      <div class="card metric-grid">
+        <div class="metric-card"><h5>Haftalık Katılım</h5><h3 id="p-metric-attendance">%92</h3></div>
+        <div class="metric-card"><h5>Doğruluk Oranı</h5><h3 id="p-metric-accuracy">%84</h3></div>
+        <div class="metric-card"><h5>Kazanılan Toplam XP</h5><h3>2,450 XP</h3></div>
+      </div>
+      <div class="card">
+        <h3>🤖 Yapay Zeka Gelişim Raporu</h3>
+        <p class="ai-report-text">"Çocuğunuz bu hafta <strong>'R' ve 'S'</strong> ses gruplarında %15 telaffuz başarısı artışı göstermiştir. Günlük akıcılık seansları kararlı ilerliyor."</p>
+      </div>
+      <div class="card">
+        <h3>📅 Terapist Randevuları & Notları</h3>
+        <div class="list-item">
+          <div>
+            <strong>Dr. Elif Yılmaz</strong>
+            <p class="text-muted">24 Haziran 2026 - 14:00</p>
+          </div>
+          <span class="badge badge-success">Onaylandı</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="therapist-dashboard" class="view">
+    <header class="app-header">
+      <h2>🩺 Terapist Klinik Paneli</h2>
+      <button class="btn btn-sm btn-secondary" onclick="app.logout()">Çıkış</button>
+    </header>
+    <main class="container">
+      <div class="card demo-stats-banner">
+        <h4>Sistem Genel Özeti (Demo Modu)</h4>
+        <div class="grid-4">
+          <div><strong>120</strong> <p>Aktif Çocuk</p></div>
+          <div><strong>40</strong> <p>Uzman Terapist</p></div>
+          <div><strong>500+</strong> <p>Tamamlanan Aktivite</p></div>
+          <div><strong>%85</strong> <p>Klinik İyileşme Oranı</p></div>
+        </div>
+      </div>
+      <h3>Hastalarım</h3>
+      <div class="patient-list" id="patient-list">
+        </div>
+    </main>
+  </div>
+
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3>⚙️ Ayarlar</h3>
+      <label>Uygulama Dili / Language</label>
+      <select id="setting-lang" class="form-control" onchange="app.changeLanguage(this.value)">
+        <option value="tr">Türkçe</option>
+        <option value="en">English</option>
+        <option value="ar">العربية</option>
+        <option value="de">Deutsch</option>
+      </select>
+      <button class="btn btn-primary w-full m-top-10" onclick="app.closeSettings()">Kaydet ve Kapat</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/SpeechEngine.js"></script>
+  <script src="js/VisionEngine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
