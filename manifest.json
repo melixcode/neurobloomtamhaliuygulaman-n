@@ -1,0 +1,18 @@
+{
+  "short_name": "NeuroBloom",
+  "name": "NeuroBloom Çocuk Gelişim ve Konuşma Terapisi Platformu",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><circle cx='256' cy='256' r='240' fill='%23A5B4FC'/><circle cx='256' cy='256' r='180' fill='%2360A5FA'/><path d='M256 120 C220 120, 190 150, 190 190 C190 240, 256 340, 256 340 C256 340, 322 240, 322 190 C322 150, 292 120, 256 120 Z' fill='%23F472B6'/></svg>",
+      "type": "image/svg+xml",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#EEF2F6",
+  "theme_color": "#60A5FA",
+  "display": "standalone",
+  "orientation": "portrait",
+  "display_override": ["window-controls-overlay", "minimal-ui"]
+}
